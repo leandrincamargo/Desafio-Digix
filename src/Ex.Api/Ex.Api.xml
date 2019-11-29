@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ex.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Ex.Api.Controllers.ClassificacaoFamiliaController.ObterClassificacaoFamiliar(System.Int32)">
+            <summary>
+            Obtém a classificação da familia seguindo as regras
+            </summary>
+            <param name="familiaId">Id da Familia a ser classificada</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ex.Api.Controllers.ClassificacaoFamiliaController.ObterTodosClassificacaoFamiliar">
+            <summary>
+            Obtém a classificação da familias com cadastro válido
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ex.Api.Controllers.FamiliaController.Adicionar(Ex.DataModel.Model.Dto.FamiliaDto)">
+            <summary>
+            Obtém a classificação da familia seguindo as regras
+            </summary>
+            <param name="familia"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
