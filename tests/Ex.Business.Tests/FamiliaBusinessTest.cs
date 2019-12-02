@@ -52,9 +52,9 @@ namespace Ex.Business.Tests.CriterioAvaliacaoTests
         }
 
         #region Dados Com Pontuacao
-        private static FamiliaDto NovaFamilia()
+        private static Familia NovaFamilia()
         {
-            return new FamiliaDto
+            return new Familia
             {
                 DominioIdStatus = (int)StatusFamilia.CadastroValido,
                 Pessoas = new List<Pessoa>

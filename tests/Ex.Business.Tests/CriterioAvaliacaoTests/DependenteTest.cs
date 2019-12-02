@@ -1,6 +1,7 @@
 ﻿using Ex.Business.CriteriosAvaliacao;
 using Ex.DataContext;
 using Ex.DataModel.Model;
+using Ex.DataModel.Model.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,9 +41,9 @@ namespace Ex.Business.Tests.CriterioAvaliacaoTests
         }
 
         #region Dados Com Pontuacao
-        private static FamiliaDto NovaFamilia()
+        private static Familia NovaFamilia()
         {
-            return new FamiliaDto
+            return new Familia
             {
                 DominioIdStatus = (int)StatusFamilia.CadastroValido,
                 Pessoas = new List<Pessoa>
@@ -85,9 +86,9 @@ namespace Ex.Business.Tests.CriterioAvaliacaoTests
         #endregion
 
         #region Dados Sem Pontuação
-        private static FamiliaDto NovaFamiliaSemPontuacao()
+        private static Familia NovaFamiliaSemPontuacao()
         {
-            return new FamiliaDto
+            return new Familia
             {
                 DominioIdStatus = (int)StatusFamilia.CadastroValido,
                 Pessoas = new List<Pessoa>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ex.DataContext;
+using Microsoft.EntityFrameworkCore;
+using System;
 using Xunit;
 
 namespace Ex.Business.Tests.CriterioAvaliacaoTests
@@ -9,7 +11,15 @@ namespace Ex.Business.Tests.CriterioAvaliacaoTests
 
         public PessoaBusinessTest()
         {
-            _pessoaBusiness = new PessoaBusiness();
+            DbContextOptions<DesafioContext> options;
+            var builder = new DbContextOptionsBuilder<DesafioContext>();
+            builder.UseInMemoryDatabase("DesafioContext");
+            options = builder.Options;
+            var desafioContext = new DesafioContext(options);
+            desafioContext.Database.EnsureDeleted();
+            desafioContext.Database.EnsureCreated();
+
+            _pessoaBusiness = new PessoaBusiness(desafioContext);
         }
 
         [Fact]
