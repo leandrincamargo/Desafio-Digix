@@ -2,22 +2,23 @@
 using Ex.DataModel.Model;
 using Ex.DataModel.Model.Common;
 using Ex.DataModel.Model.Dto;
+using Ex.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Ex.DataModel.Model.Enumeradores;
 
-namespace Ex.Business
+namespace Ex.Service.Service
 {
-    public class FamiliaBusiness
+    public class FamiliaService : IFamiliaService
     {
-        private readonly PessoaBusiness _pessoaBusiness;
+        private readonly PessoaService _pessoaService;
         private readonly DesafioContext _desafioContext;
 
-        public FamiliaBusiness(DesafioContext desafioContext)
+        public FamiliaService(DesafioContext desafioContext)
         {
             _desafioContext = desafioContext;
-            _pessoaBusiness = new PessoaBusiness(_desafioContext);
+            _pessoaService = new PessoaService(_desafioContext);
         }
 
         public IQueryable<Familia> ObterTodos()
@@ -25,9 +26,14 @@ namespace Ex.Business
             return _desafioContext.Familia;
         }
 
-        public IQueryable<Familia> ObterComPredicado(Func<Familia, bool> lambda)
+        public Familia ObterFamilia(int familiaId)
         {
-            return _desafioContext.Familia.Where(lambda).AsQueryable();
+            return _desafioContext.Familia.Where(x => x.FamiliaId == familiaId).FirstOrDefault();
+        }
+
+        public List<Familia> ObterTodosValidos()
+        {
+            return _desafioContext.Familia.Where(x => x.DominioIdStatus == (int)StatusFamilia.CadastroValido).ToList();
         }
 
         public decimal ObterRendaFamiliar(Familia familia)
@@ -46,7 +52,7 @@ namespace Ex.Business
 
             try
             {
-                this.Converter(familiaDto);
+                Converter(familiaDto);
             }
             catch (Exception e)
             {
@@ -58,7 +64,7 @@ namespace Ex.Business
 
         public int ObterQuantidadeDependentesMenoresDeIdade(Familia familia)
         {
-            return familia.Pessoas.Count(p => p.DominioIdTipo == (int)TipoPessoa.Dependente && _pessoaBusiness.EhMenorDeIdade(p.DataDeNascimento));
+            return familia.Pessoas.Count(p => p.DominioIdTipo == (int)TipoPessoa.Dependente && _pessoaService.EhMenorDeIdade(p.DataDeNascimento));
         }
 
         private Familia Converter(FamiliaDto familiaDto)
@@ -68,12 +74,12 @@ namespace Ex.Business
                 DominioIdStatus = (int)StatusFamilia.CadastroIncompleto
             };
 
-            this.Adicionar(familia);
+            Adicionar(familia);
 
             foreach (var pessoaDto in familiaDto.Pessoas)
-                familia.Pessoas.Add(_pessoaBusiness.Converter(pessoaDto, familia.FamiliaId));
+                familia.Pessoas.Add(_pessoaService.Converter(pessoaDto, familia.FamiliaId));
 
-            this.Validar(familia);
+            Validar(familia);
 
             return familia;
         }
@@ -86,7 +92,7 @@ namespace Ex.Business
             };
 
             foreach (var pessoa in familia.Pessoas)
-                familiaDto.Pessoas.Add(_pessoaBusiness.ConverterParaDto(pessoa));
+                familiaDto.Pessoas.Add(_pessoaService.ConverterParaDto(pessoa));
 
             return familiaDto;
         }

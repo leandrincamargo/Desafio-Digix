@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.Api", "src\Ex.Api\Ex.Api.csproj", "{1CDF4E99-934D-4600-9444-151D6186A98E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.Business.Tests", "tests\Ex.Business.Tests\Ex.Business.Tests.csproj", "{14D34CBA-46CD-4333-9096-84CCC48501AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.Service.Tests", "tests\Ex.Service.Tests\Ex.Service.Tests.csproj", "{14D34CBA-46CD-4333-9096-84CCC48501AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.Business", "src\Ex.Business\Ex.Business.csproj", "{F802043B-DA09-4F58-90E3-5867867AFE89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.Service", "src\Ex.Service\Ex.Service.csproj", "{F802043B-DA09-4F58-90E3-5867867AFE89}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ex.DataContext", "src\Ex.DataContext\Ex.DataContext.csproj", "{2053E11F-7C84-47C8-B5A4-684E2A8F7CB6}"
 EndProject

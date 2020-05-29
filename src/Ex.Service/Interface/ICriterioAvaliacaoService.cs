@@ -1,8 +1,8 @@
 ﻿using Ex.DataModel.Model;
 
-namespace Ex.Business.CriteriosAvaliacao
+namespace Ex.Service.Interface
 {
-    public interface ICriterioAvaliacao
+    public interface ICriterioAvaliacaoService
     {
         int ObterPontuacao(Familia familia);
     }

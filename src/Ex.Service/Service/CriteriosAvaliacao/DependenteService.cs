@@ -1,18 +1,19 @@
 ﻿using Ex.DataContext;
 using Ex.DataModel.Model;
+using Ex.Service.Interface;
 
-namespace Ex.Business.CriteriosAvaliacao
+namespace Ex.Service.Service.CriteriosAvaliacao
 {
-    public class Dependente : ICriterioAvaliacao
+    public class DependenteService : ICriterioAvaliacaoService
     {
         private const int ZeroPonto = 0;
         private const int DoisPontos = 2;
         private const int TresPontos = 3;
-        private readonly FamiliaBusiness _familiaBusiness;
+        private readonly FamiliaService _familiaBusiness;
 
-        public Dependente(DesafioContext desafioContext)
+        public DependenteService(DesafioContext desafioContext)
         {
-            _familiaBusiness = new FamiliaBusiness(desafioContext);
+            _familiaBusiness = new FamiliaService(desafioContext);
         }
 
         public int ObterPontuacao(Familia familia)

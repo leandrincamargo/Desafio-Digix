@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Ex.Service.Interface;
+using Ex.Service.Service;
 
 namespace Ex.Api
 {
@@ -29,6 +31,11 @@ namespace Ex.Api
             });
 
             services.AddScoped<DesafioContext>();
+
+            services.AddScoped<IAvalicaoFamiliarService, AvaliacaoFamiliarService>();
+            services.AddScoped<IFamiliaService, FamiliaService>();
+            services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<IRendaService, RendaService>();
 
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 

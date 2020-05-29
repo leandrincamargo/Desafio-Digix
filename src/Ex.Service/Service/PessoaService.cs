@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using Ex.DataContext;
+﻿using Ex.DataContext;
 using Ex.DataModel.Model;
 using Ex.DataModel.Model.Dto;
+using Ex.Service.Interface;
+using System;
+using System.Collections.Generic;
 
-namespace Ex.Business
+namespace Ex.Service.Service
 {
-    public class PessoaBusiness
+    public class PessoaService : IPessoaService
     {
-        private readonly RendaBusiness _rendaBusiness;
+        private readonly RendaService _rendaService;
         private readonly DesafioContext _desafioContext;
 
-        public PessoaBusiness(DesafioContext desafioContext)
+        public PessoaService(DesafioContext desafioContext)
         {
             _desafioContext = desafioContext;
-            _rendaBusiness = new RendaBusiness(_desafioContext);
+            _rendaService = new RendaService(_desafioContext);
         }
 
         public bool EhMenorDeIdade(DateTime dataDeNascimento)
@@ -38,18 +39,18 @@ namespace Ex.Business
 
         public Pessoa Converter(PessoaDto pessoaDto, int familiaId)
         {
-            var pessoa = new Pessoa 
-            { 
+            var pessoa = new Pessoa
+            {
                 Nome = pessoaDto.Nome,
                 DataDeNascimento = pessoaDto.DataDeNascimento,
                 DominioIdTipo = pessoaDto.TipoId,
                 FamiliaId = familiaId
             };
 
-            this.Adicionar(pessoa);
+            Adicionar(pessoa);
 
             foreach (var rendaDto in pessoaDto.Rendas)
-                pessoa.Rendas.Add(_rendaBusiness.Converter(rendaDto, pessoa.PessoaId));
+                pessoa.Rendas.Add(_rendaService.Converter(rendaDto, pessoa.PessoaId));
 
             return pessoa;
         }
@@ -72,9 +73,9 @@ namespace Ex.Business
                 DataDeNascimento = pessoa.DataDeNascimento,
                 Rendas = new List<RendaDto>()
             };
-            
+
             foreach (var renda in pessoa.Rendas)
-                pessoaDto.Rendas.Add(_rendaBusiness.ConverterParaDto(renda));
+                pessoaDto.Rendas.Add(_rendaService.ConverterParaDto(renda));
 
             return pessoaDto;
         }

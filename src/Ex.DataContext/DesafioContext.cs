@@ -8,13 +8,14 @@ namespace Ex.DataContext
     public class DesafioContext : DbContext
     {
         public DesafioContext(DbContextOptions<DesafioContext> options) : base(options) { }
+        public DesafioContext() { }
 
-        public DbSet<AvaliacaoFamiliar> AvaliacaoFamiliar { get; set; }
-        public DbSet<Familia> Familia { get; set; }
-        public DbSet<Pessoa> Pessoa { get; set; }
-        public DbSet<Renda> Renda { get; set; }
-        public DbSet<Dominio> Dominio { get; set; }
-        public DbSet<DominioCategoria> DominioCategoria { get; set; }
+        public virtual DbSet<AvaliacaoFamiliar> AvaliacaoFamiliar { get; set; }
+        public virtual DbSet<Familia> Familia { get; set; }
+        public virtual DbSet<Pessoa> Pessoa { get; set; }
+        public virtual DbSet<Renda> Renda { get; set; }
+        public virtual DbSet<Dominio> Dominio { get; set; }
+        public virtual DbSet<DominioCategoria> DominioCategoria { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

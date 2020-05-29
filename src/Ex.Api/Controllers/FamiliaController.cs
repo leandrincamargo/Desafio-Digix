@@ -1,6 +1,5 @@
-﻿using Ex.Business;
-using Ex.DataContext;
-using Ex.DataModel.Model.Dto;
+﻿using Ex.DataModel.Model.Dto;
+using Ex.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ex.Api.Controllers
@@ -10,13 +9,11 @@ namespace Ex.Api.Controllers
     [ApiController]
     public class FamiliaController : ControllerBase
     {
-        private readonly DesafioContext _desafioContext;
-        private readonly FamiliaBusiness _familiaBusiness;
+        private readonly IFamiliaService _familiaService;
 
-        public FamiliaController(DesafioContext desafioContext)
+        public FamiliaController(IFamiliaService familiaService)
         {
-            _desafioContext = desafioContext;
-            _familiaBusiness = new FamiliaBusiness(_desafioContext);
+            _familiaService = familiaService;
         }
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace Ex.Api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var resultado = _familiaBusiness.Adicionar(familia);
+            var resultado = _familiaService.Adicionar(familia);
 
             if (!resultado.Success) return BadRequest(resultado);
 

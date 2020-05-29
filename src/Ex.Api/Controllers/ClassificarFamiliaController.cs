@@ -1,10 +1,7 @@
-﻿using Ex.Business;
-using Ex.DataContext;
-using Ex.DataModel.Model.Dto;
+﻿using Ex.DataModel.Model.Dto;
+using Ex.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using static Ex.DataModel.Model.Enumeradores;
 
 namespace Ex.Api.Controllers
 {
@@ -13,15 +10,11 @@ namespace Ex.Api.Controllers
     [ApiController]
     public class ClassificacaoFamiliaController : ControllerBase
     {
-        private readonly DesafioContext _desafioContext;
-        private readonly FamiliaBusiness _familiaBusiness;
-        private readonly AvaliacaoFamiliarBusiness _avaliacaoFamiliarBusiness;
+        private readonly IAvalicaoFamiliarService _avaliacaoFamiliarService;
 
-        public ClassificacaoFamiliaController(DesafioContext desafioContext)
+        public ClassificacaoFamiliaController(IAvalicaoFamiliarService avaliacaoFamiliarService)
         {
-            _desafioContext = desafioContext;
-            _familiaBusiness = new FamiliaBusiness(_desafioContext);
-            _avaliacaoFamiliarBusiness = new AvaliacaoFamiliarBusiness(_desafioContext);
+            _avaliacaoFamiliarService = avaliacaoFamiliarService;
         }
 
         /// <summary>
@@ -33,8 +26,7 @@ namespace Ex.Api.Controllers
         [Route("{familiaId:int}")]
         public AvaliacaoFamiliarDto ObterClassificacaoFamiliar(int familiaId)
         {
-            var familia = _familiaBusiness.ObterComPredicado(x => x.FamiliaId == familiaId).First();
-            var avaliacaoFamiliarDto = _avaliacaoFamiliarBusiness.ClassificarFamilia(familia);
+            var avaliacaoFamiliarDto = _avaliacaoFamiliarService.ClassificarFamiliaPorId(familiaId);
 
             return avaliacaoFamiliarDto;
         }
@@ -47,9 +39,7 @@ namespace Ex.Api.Controllers
         [Route("")]
         public List<AvaliacaoFamiliarDto> ObterTodosClassificacaoFamiliar()
         {
-            var familias = _familiaBusiness.ObterComPredicado(x => x.DominioIdStatus == (int)StatusFamilia.CadastroValido).ToList();
-
-            var avaliacoesFamiliarDto = _avaliacaoFamiliarBusiness.ClassificarFamilias(familias);
+            var avaliacoesFamiliarDto = _avaliacaoFamiliarService.ClassificarFamilias();
 
             return avaliacoesFamiliarDto;
         }

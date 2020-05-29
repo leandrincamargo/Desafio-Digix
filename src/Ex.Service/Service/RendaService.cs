@@ -1,15 +1,16 @@
-﻿using System;
-using Ex.DataContext;
+﻿using Ex.DataContext;
 using Ex.DataModel.Model;
 using Ex.DataModel.Model.Dto;
+using Ex.Service.Interface;
+using System;
 
-namespace Ex.Business
+namespace Ex.Service.Service
 {
-    public class RendaBusiness
+    public class RendaService : IRendaService
     {
         private readonly DesafioContext _desafioContext;
 
-        public RendaBusiness(DesafioContext desafioContext)
+        public RendaService(DesafioContext desafioContext)
         {
             _desafioContext = desafioContext;
         }
@@ -22,7 +23,7 @@ namespace Ex.Business
                 PessoaId = pessoaId
             };
 
-            this.Adicionar(renda);
+            Adicionar(renda);
 
             return renda;
         }

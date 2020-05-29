@@ -1,19 +1,20 @@
 ﻿using Ex.DataContext;
 using Ex.DataModel.Model;
+using Ex.Service.Interface;
 
-namespace Ex.Business.CriteriosAvaliacao
+namespace Ex.Service.Service.CriteriosAvaliacao
 {
-    public class RendaFamiliar : ICriterioAvaliacao
+    public class RendaFamiliarService : ICriterioAvaliacaoService
     {
         private const int CincoPontos = 5;
         private const int TresPontos = 3;
         private const int UmPonto = 1;
         private const int Zero = 0;
-        private readonly FamiliaBusiness _familiaBusiness;
+        private readonly FamiliaService _familiaBusiness;
 
-        public RendaFamiliar(DesafioContext desafioContext)
+        public RendaFamiliarService(DesafioContext desafioContext)
         {
-            _familiaBusiness = new FamiliaBusiness(desafioContext);
+            _familiaBusiness = new FamiliaService(desafioContext);
         }
 
         public int ObterPontuacao(Familia familia)
